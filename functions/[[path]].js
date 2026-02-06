@@ -502,6 +502,7 @@ export async function onRequest(context) {
 	let type = "ws";
 	let scv = env.SCV || 'false';
     let ech = "";
+	let fp = "random";
 	alpn = env.ALPN || alpn;
 	let UD = Math.floor(((timestamp - Date.now()) / timestamp * 99 * 1099511627776) / 2);
 	if (env.UA) MamaJustKilledAMan = MamaJustKilledAMan.concat(await 整理(env.UA));
@@ -628,6 +629,7 @@ export async function onRequest(context) {
 		const extra = url.searchParams.get('extra') || null;
 		xhttp = (mode ? `&mode=${mode}` : "") + (extra ? `&extra=${encodeURIComponent(extra)}` : "");
 		alpn = url.searchParams.get('alpn') || (xhttp ? "h3%2Ch2" : alpn);
+		fp = url.searchParams.get('fp') || fp;
         ech = url.searchParams.get('ech') || ech;
 		隧道版本作者 = url.searchParams.get('edgetunnel') || url.searchParams.get('epeius') || 隧道版本作者;
 		获取代理IP = url.searchParams.get('proxyip') || 'false';
@@ -919,10 +921,10 @@ export async function onRequest(context) {
 				const vmessLink = `vmess://${utf8ToBase64(`{"v":"2","ps":"${addressid + 节点备注}","add":"${address}","port":"${port}","id":"${uuid}","aid":"${额外ID}","scy":"${加密方式}","net":"ws","type":"${type}","host":"${伪装域名}","path":"${最终路径}","tls":"tls","sni":"${sni}","alpn":"${encodeURIComponent(alpn)}","fp":"","allowInsecure":"${scv == 'true' ? '1' : '0'}","fragment":"1,40-60,30-50,tlshello"}`)}`;
 				return vmessLink;
 			} else if (协议类型 == 'Trojan') {
-				const 特洛伊Link = `trojan://${uuid}@${address}:${port}?security=tls&sni=${sni}&alpn=${encodeURIComponent(alpn)}${ech ? '&ech=' + encodeURIComponent(ech) : ''}&fp=random&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径) + (scv == 'true' ? '&allowInsecure=1' : '')}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
+				const 特洛伊Link = `trojan://${uuid}@${address}:${port}?security=tls&sni=${sni}&alpn=${encodeURIComponent(alpn)}${ech ? '&ech=' + encodeURIComponent(ech) : ''}&fp=${fp}&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径) + (scv == 'true' ? '&allowInsecure=1' : '')}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
 				return 特洛伊Link;
 			} else {
-				const 为烈士Link = `vless://${uuid}@${address}:${port}?encryption=none&security=tls&sni=${sni}&alpn=${encodeURIComponent(alpn)}${ech ? '&ech=' + encodeURIComponent(ech) : ''}&fp=random&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径) + xhttp + (scv == 'true' ? '&allowInsecure=1' : '')}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
+				const 为烈士Link = `vless://${uuid}@${address}:${port}?encryption=none&security=tls&sni=${sni}&alpn=${encodeURIComponent(alpn)}${ech ? '&ech=' + encodeURIComponent(ech) : ''}&fp=${fp}&type=${type}&host=${伪装域名}&path=${encodeURIComponent(最终路径) + xhttp + (scv == 'true' ? '&allowInsecure=1' : '')}&fragment=${encodeURIComponent('1,40-60,30-50,tlshello')}#${encodeURIComponent(addressid + 节点备注)}`;
 				return 为烈士Link;
 			}
 
